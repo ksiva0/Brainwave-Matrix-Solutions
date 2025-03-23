@@ -14,7 +14,7 @@ This project builds a **Fake News Detection Model** using **Logistic Regression*
 
 Clone the repository and install dependencies:
 
-git clone https://github.com/ksiva0/Fake-News-Detection.git
+git clone https://github.com/ksiva0/Brainwave-Matrix-Solutions/Fake_News_Detection.git
 cd Fake-News-Detection
 pip install -r requirements.txt
 
