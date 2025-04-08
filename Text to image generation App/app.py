@@ -4,11 +4,9 @@ import requests
 from PIL import Image  
 from io import BytesIO  
 
-# Constants  
-API_URL = "<YOUR_API_URL>"  # Replace with your DALL-E API endpoint  
-API_KEY = "<YOUR_API_KEY>"  # Replace with your API Key  
+API_URL = st.secrets["api_url"]
+API_KEY = st.secrets["api_key"]
 
-# Streamlit App  
 def main():  
     st.title("Text to Image Generation")  
     st.subheader("Generate images from textual descriptions")  
