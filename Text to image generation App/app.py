@@ -1,11 +1,11 @@
-
 import streamlit as st  
 import requests  
 from PIL import Image  
 from io import BytesIO  
 
-API_URL = "https://api.openai.com/v1/images"
-API_KEY = st.secrets["api_key"]
+# Constants  
+API_URL = "https://api.openai.com/v1/images/generations" 
+API_KEY = st.secrets["api"]["key"] 
 
 def main():  
     st.title("Text to Image Generation")  
@@ -37,7 +37,7 @@ def generate_image(description):
     
     if response.status_code == 200:  
         # Assuming the response returns a URL of the image  
-        return response.json().get("image_url")  # Adjust based on your API response  
+        return response.json().get("data")[0].get("url")  # Adjust based on your API response  
     else:  
         st.error(f"Error: {response.status_code} - {response.text}")  
         return None  
