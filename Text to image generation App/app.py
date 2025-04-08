@@ -4,7 +4,7 @@ import requests
 from PIL import Image  
 from io import BytesIO  
 
-API_URL = st.secrets["api_url"]
+API_URL = "https://api.openai.com/v1/images"
 API_KEY = st.secrets["api_key"]
 
 def main():  
