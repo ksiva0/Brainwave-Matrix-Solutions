@@ -5,7 +5,7 @@ from io import BytesIO
 
 # Constants  
 API_URL = "https://api.openai.com/v1/images/generations" 
-API_KEY = st.secrets["api"]["key"] 
+API_KEY = st.secrets["api_key"] 
 
 def main():  
     st.title("Text to Image Generation")  
@@ -52,4 +52,4 @@ def display_image(image_url):
         st.error("Could not retrieve the image.")  
 
 if __name__ == "__main__":  
-    main()  
+    main() 
