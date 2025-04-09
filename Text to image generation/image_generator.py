@@ -10,25 +10,28 @@ dtype = torch.float16 if device == "cuda" else torch.float32
 @st.cache_resource
 def load_model():
     pipe = StableDiffusionPipeline.from_pretrained(
-        "runwayml/stable-diffusion-v1-5",  # Use a more refined model
+        "runwayml/stable-diffusion-v1-5",
         torch_dtype=dtype,
     ).to(device)
-    pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config) # change scheduler
-    pipe.enable_xformers_memory_efficient_attention() #enable xformers
+    pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
+    try:
+        pipe.enable_xformers_memory_efficient_attention()
+    except ModuleNotFoundError:
+        print("xformers not installed, memory efficient attention disabled")
     return pipe
 
 pipe = load_model()
 
 def generate_image(prompt):
-    # Generate image from text prompt with optimized parameters
+    # Generate image from text prompt
     generator = torch.Generator(device=device).manual_seed(42)  # For reproducibility
     image = pipe(
         prompt,
         num_inference_steps=30,  # Slightly increase steps for better quality
         guidance_scale=7.5,      # Adjust guidance scale for better prompt adherence
         generator=generator,
-        height=512, # set size
-        width=512 # set size
+        height=512,
+        width=512
     ).images[0]
     return image
 
