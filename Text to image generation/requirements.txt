@@ -2,6 +2,6 @@ streamlit
 torch  
 torchvision  
 torchaudio  
-transformers>=4.19.0  
+transformers
 diffusers  
 Pillow  
