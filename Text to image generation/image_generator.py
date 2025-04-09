@@ -2,9 +2,15 @@ import streamlit as st
 from diffusers import StableDiffusionPipeline  
 import torch  
 
-# Load model and use GPU if available  
-device = "cuda" if torch.cuda.is_available() else "cpu"  
-pipe = StableDiffusionPipeline.from_pretrained("CompVis/stable-diffusion-v1-4", torch_dtype=torch.float16).to(device)  
+# Determine device and dtype
+device = "cuda" if torch.cuda.is_available() else "cpu"
+dtype = torch.float16 if device == "cuda" else torch.float32
+
+# Load model
+pipe = StableDiffusionPipeline.from_pretrained(
+    "CompVis/stable-diffusion-v1-4",
+    torch_dtype=dtype
+).to(device)
 
 def generate_image(prompt):  
     # Generate image from text prompt with reduced steps for faster processing  
